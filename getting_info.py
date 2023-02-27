@@ -1,6 +1,8 @@
+import urllib.request
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
+import os
 
 browser = webdriver.Chrome()
 browser.maximize_window()
@@ -9,6 +11,13 @@ likes_count = []
 title_list = []
 views_list=[]
 upload_time = []
+image = 1
+
+try:
+  os.makedirs("Thumbnails")
+except:
+  print("Directory Thumbnails present !!")
+  pass
 for link in file:
   browser.get(link)
   time.sleep(2)
@@ -32,17 +41,18 @@ for link in file:
     title=title_element[1].text
     views=title_element[3].text.split(" ")[0]
     upload = title_element[3].text.split(" ")[2]+title_element[3].text.split(" ")[3]+title_element[3].text.split(" ")[4]
-    print(title)
-    print(views)
-    print(upload)
     title_list.append(title)
     views_list.append(views)
     upload_time.append(upload)
 
+    # Part (iii) - Getting Thumbnail images and saving in a folder
     # thumbnail image
-    thumbnail = browser.find_element(By.XPATH, "//link[@rel='image_src']")
-    print(thumbnail.get_attribute("href"))
-    time.sleep(5)
+    thumbnail_element = browser.find_element(By.XPATH, "//link[@rel='image_src']")
+    thumbnail_link = thumbnail_element.get_attribute("href")
+    # Downloading the thumbnail using urllib
+    urllib.request.urlretrieve(thumbnail_link,"./Thumbnails/thumbnail"+str(image)+".png")
+    image+=1
+    time.sleep(3)
   except Exception as e:
     print(e)
     pass

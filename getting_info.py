@@ -3,7 +3,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
 import os
-
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 browser = webdriver.Chrome()
 browser.maximize_window()
 file = open("links.txt", "r")
@@ -52,7 +53,33 @@ for link in file:
     # Downloading the thumbnail using urllib
     urllib.request.urlretrieve(thumbnail_link,"./Thumbnails/thumbnail"+str(image)+".png")
     image+=1
-    time.sleep(3)
+    time.sleep(2)
+   # THis is for scrolling -> browser.find_element(By.CLASS_NAME, "style-scope ytd-continuation-item-renderer").click()
+
+    # Part (iv) - Comments
+
+    comment_section = browser.find_element(By.XPATH,"//*[@id='comments']")
+    print("comment ok")
+    browser.execute_script("arguments[0].scrollIntoView();",comment_section)
+    time.sleep(7)
+    last_height = browser.execute_script('return document.documentElement.scrollHeight')
+    while True:
+      browser.execute_script("window.scrollTo(0,'document.documentElement.scrollHeight');")
+      time.sleep(2)
+      new_height = browser.execute_script('return document.documentElement.scrollHeight')
+      if new_height == last_height:
+        break
+      last_height = new_height
+
+    browser.execute_script("window.scrollTo(0,'document.documentElement.scrollHeight');")
+    try:
+      comment = browser.find_elements(By.XPATH,"//*[@id='content-text']")
+      print(len(comment))
+      for i in comment:
+        print(i.text)
+    except:
+      print("gadbad")
+      pass
   except Exception as e:
     print(e)
     pass

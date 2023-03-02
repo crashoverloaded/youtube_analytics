@@ -1,3 +1,4 @@
 .idea/
 ./venv/
 Thumbnails/
+./__pycache__/

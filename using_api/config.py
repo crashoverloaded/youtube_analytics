@@ -1,4 +1,0 @@
-YOUTUBE_KEY=AIzaSyBTvpFMCn0PamsvTa3HQ0cWXRIL3gt3Tx8
-CLIENT_ID = 'youtube-analytics-379412'
-OAUTHCLIENT_ID = '538482028093-7m5pd2883rcqbgndg527pu4omn8s625j.apps.googleusercontent.com'
-OAUTHSCLIENT_SECRET = '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'

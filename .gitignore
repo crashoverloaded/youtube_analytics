@@ -2,4 +2,4 @@
 venv/
 Thumbnails/
 __pycache__/
-./using_api/config.py
+using_api/config.py

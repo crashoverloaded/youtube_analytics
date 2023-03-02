@@ -3,11 +3,15 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
 import os
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+import extractLink
+
+session = extractLink.FetchLink("https://www.youtube.com/@krishnaik06/videos")
+links = session.browser_session()
+session.store_link("links.txt",links)
+
 browser = webdriver.Chrome()
 browser.maximize_window()
-file = open("links.txt", "r")
+
 likes_count = []
 title_list = []
 views_list=[]
@@ -18,8 +22,7 @@ try:
   os.makedirs("Thumbnails")
 except:
   print("Directory Thumbnails present !!")
-  pass
-for link in file:
+for link in links:
   browser.get(link)
   time.sleep(2)
   try:

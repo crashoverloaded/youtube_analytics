@@ -1,4 +1,5 @@
 .idea/
-./venv/
+venv/
 Thumbnails/
 __pycache__/
+./using_api/config.py

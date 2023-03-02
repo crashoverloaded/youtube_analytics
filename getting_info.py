@@ -58,10 +58,9 @@ for link in file:
 
     # Part (iv) - Comments
 
-    comment_section = browser.find_element(By.XPATH,"//*[@id='comments']")
-    print("comment ok")
+    comment_section = browser.find_element(By.XPATH,"//*[@id='comments'][last()]")
     browser.execute_script("arguments[0].scrollIntoView();",comment_section)
-    time.sleep(7)
+    time.sleep(3)
     last_height = browser.execute_script('return document.documentElement.scrollHeight')
     while True:
       browser.execute_script("window.scrollTo(0,'document.documentElement.scrollHeight');")
@@ -74,9 +73,9 @@ for link in file:
     browser.execute_script("window.scrollTo(0,'document.documentElement.scrollHeight');")
     try:
       comment = browser.find_elements(By.XPATH,"//*[@id='content-text']")
-      print(len(comment))
-      for i in comment:
-        print(i.text)
+      author = browser.find_elements(By.XPATH,"//*[@id='author-text']")
+      for i in range(len(comment)):
+        print(comment[i].text,author[i].text)
     except:
       print("gadbad")
       pass

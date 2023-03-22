@@ -14,4 +14,4 @@ r = youtube.playlistItems().list(playlistId=id2,part='snippet',maxResults=50).ex
 for i in r['items']:
     print(i['snippet'])
 
-print(r)
+
